@@ -42,6 +42,34 @@ namespace MyOwnToDoListApplication.Srvices
 				}
 			}
 		}
+
+		public void DeleteSubToDoByName(string name, string connectionString)
+		{
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+
+					string query = "DELETE FROM SubToDo WHERE Name = @name";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@name", name);
+
+						command.ExecuteNonQuery();
+					}
+				}
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+		}
 	}
 }
 

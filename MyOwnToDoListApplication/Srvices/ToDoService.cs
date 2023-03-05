@@ -68,7 +68,34 @@ namespace MyOwnToDoListApplication.Srvices
 			}
 		}
 
+		public void UpdateToDoByName(string name, string newName, string connectionString)
+		{
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
 
+					string query = "UPDATE ToDo SET Name = @newName WHERE Name = @name";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@newName", newName);
+                        command.Parameters.AddWithValue("@name", name);
+
+						command.ExecuteNonQuery();
+                    }
+				}
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+		}
 	}
 }
 

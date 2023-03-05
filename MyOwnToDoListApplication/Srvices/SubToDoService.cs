@@ -176,6 +176,56 @@ namespace MyOwnToDoListApplication.Srvices
 				}
 			}
 		}
+
+		public SubToDo GetSubToDoByName(string name, string connectionString)
+		{
+			SubToDo subToDo = new SubToDo();
+
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+
+					string query = "SELECT * FROM SubToDo WHERE Name = @name";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@name", name);
+
+						using (var reader = command.ExecuteReader())
+						{
+							while (reader.Read())
+							{
+								var subToDoID = reader.GetInt32(reader.GetOrdinal("Id"));
+								var subToDoName = reader.GetString(reader.GetOrdinal("Name"));
+								var subToDoDesc = reader.GetString(reader.GetOrdinal("Description"));
+								var subToDoDeadline = reader.GetDateTime(reader.GetOrdinal("Deadline"));
+								var subToDoStatus = reader.GetBoolean(reader.GetOrdinal("Status"));
+								var toDoID = reader.GetInt32(reader.GetOrdinal("ToDoId"));
+
+								subToDo.Id = subToDoID;
+                                subToDo.Name = subToDoName;
+                                subToDo.Description = subToDoDesc;
+                                subToDo.Deadline = subToDoDeadline;
+                                subToDo.Status = subToDoStatus;
+                                subToDo.ToDoId = toDoID;
+                            }
+						}
+					}
+				}
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+
+			return subToDo;
+		}
 	}
 }
 

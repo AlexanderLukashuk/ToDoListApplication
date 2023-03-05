@@ -39,6 +39,36 @@ namespace MyOwnToDoListApplication.Srvices
 				}
             }
 		}
+
+		public void DeleteToDoByName(string name, string connectionString)
+		{
+			using (var connecction = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connecction.Open();
+
+					string query = "DELETE FROM ToDo WHERE Name = @name";
+
+					using (var command = new SqlCommand(query, connecction))
+					{
+						command.Parameters.AddWithValue("@name", name);
+
+						command.ExecuteNonQuery();
+					}
+				}
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connecction.Close();
+				}
+			}
+		}
+
+
 	}
 }
 

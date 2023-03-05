@@ -146,6 +146,16 @@
             "rid": "win"
           }
         }
+      },
+      "MyOwnToDoListApplicationLibrary/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/MyOwnToDoListApplicationLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MyOwnToDoListApplicationLibrary.dll": {}
+        }
       }
     }
   },
@@ -462,10 +472,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "MyOwnToDoListApplicationLibrary/1.0.0": {
+      "type": "project",
+      "path": "../MyOwnToDoListApplicationLibrary/MyOwnToDoListApplicationLibrary.csproj",
+      "msbuildProject": "../MyOwnToDoListApplicationLibrary/MyOwnToDoListApplicationLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "MyOwnToDoListApplicationLibrary >= 1.0.0",
       "System.Data.SqlClient >= 4.8.5"
     ]
   },
@@ -493,7 +509,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/aleksandrlukasuk/Projects/MyOwnToDoListApplication/MyOwnToDoListApplicationLibrary/MyOwnToDoListApplicationLibrary.csproj": {
+              "projectPath": "/Users/aleksandrlukasuk/Projects/MyOwnToDoListApplication/MyOwnToDoListApplicationLibrary/MyOwnToDoListApplicationLibrary.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

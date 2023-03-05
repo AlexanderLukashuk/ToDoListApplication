@@ -70,6 +70,39 @@ namespace MyOwnToDoListApplication.Srvices
 				}
 			}
 		}
+
+		public void UpdateSubToDoByName(string name, string newName, string newDesc, DateTime newDeadline, string connectionString)
+		{
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+
+					string query = "UPDATE SubToDo SET Name = @newName, Description = @newDesc, " +
+						"Deadline = @newDeadline " +
+						"WHERE Name = @name";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@newName", newName);
+                        command.Parameters.AddWithValue("@newDesc", newDesc);
+                        command.Parameters.AddWithValue("@newDeadline", newDeadline);
+                        command.Parameters.AddWithValue("@name", name);
+
+						command.ExecuteNonQuery();
+                    }
+                }
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+		}
 	}
 }
 

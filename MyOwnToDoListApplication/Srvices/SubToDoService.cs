@@ -147,6 +147,35 @@ namespace MyOwnToDoListApplication.Srvices
 
 			return subtodoList;
 		}
+
+		public void ChangeSubToDoStatusByName(string name, bool newStatus, string connectionString)
+		{
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+
+					string query = "UPDATE SubToDo SET Status = @newStatus WHERE Name = @name";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@newStatus", newStatus);
+                        command.Parameters.AddWithValue("@name", name);
+
+						command.ExecuteNonQuery();
+                    }
+                }
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+		}
 	}
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using MyOwnToDoListApplicationLibrary;
 
 namespace MyOwnToDoListApplication.Srvices
 {
@@ -102,6 +103,49 @@ namespace MyOwnToDoListApplication.Srvices
 					connection.Close();
 				}
 			}
+		}
+
+		public List<SubToDo> GetAllSubToDo(int todoID, string connectionString)
+		{
+			var subtodoList = new List<SubToDo>();
+
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+
+					string query = "SELECT * FROM SubToDo WHERE ToDoId = @todoID";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						using (var reader = command.ExecuteReader())
+						{
+							while (reader.Read())
+							{
+								var subtodoID = reader.GetInt32(reader.GetOrdinal("Id"));
+								var name = reader.GetString(reader.GetOrdinal("Name"));
+								var desc = reader.GetString(reader.GetOrdinal("Description"));
+								var deadline = reader.GetDateTime(reader.GetOrdinal("Deadline"));
+								var status = reader.GetBoolean(reader.GetOrdinal("Status"));
+								var todoId = reader.GetInt32(reader.GetOrdinal("ToDoId"));
+
+								subtodoList.Add(new SubToDo { Id = subtodoID, Name = name, Description = desc, Deadline = deadline, Status = status, ToDoId = todoId });
+                            }
+						}
+					}
+                }
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+
+			return subtodoList;
 		}
 	}
 }

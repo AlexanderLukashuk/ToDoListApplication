@@ -137,6 +137,50 @@ namespace MyOwnToDoListApplication.Srvices
 
 			return todoList;
 		}
+
+		public ToDo GetToDoByName(string name, string connectionString)
+		{
+			ToDo todo = new ToDo();
+
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+
+					string query = "SELECT * FROM ToDo WHERE Name = @name";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@name", name);
+
+						using (var reader = command.ExecuteReader())
+						{
+							while (reader.Read())
+							{
+								var todoID = reader.GetInt32(reader.GetOrdinal("Id"));
+								var tempName = reader.GetString(reader.GetOrdinal("Name"));
+								var progress = reader.GetDouble(reader.GetOrdinal("Progress"));
+
+								todo.Id = todoID;
+								todo.Name = tempName;
+								todo.Progress = progress;
+							}
+						}
+					}
+				}
+				catch (SqlException ex)
+				{
+					Console.WriteLine("ERROR: " + ex.Message);
+				}
+				finally
+				{
+					connection.Close();
+				}
+			}
+
+			return todo;
+		}
 	}
 }
 

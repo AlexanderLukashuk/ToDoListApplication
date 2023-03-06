@@ -109,5 +109,43 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 3:
+            {
+                Console.Write("Enter ToDo name which you want to update: ");
+                string? name = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine("ToDo name can't be null or empty");
+                }
+                else
+                {
+                    ToDo? tempToDo = todos.Find(t => t.Name == name);
+
+                    if (tempToDo == null)
+                    {
+                        Console.WriteLine($"There is no ToDo {name}");
+                    }
+                    else
+                    {
+                        Console.Write($"Enter new name for ToDo {name}: ");
+                        string? newName = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(newName))
+                        {
+                            Console.WriteLine($"NewName can't be null or empty. Name ToDo {name} didn't change");
+                        }
+                        else
+                        {
+                            todoService.UpdateToDoByName(name, newName, connectionString);
+                            Console.WriteLine("ToDo successfeully updated");
+                        }
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
     }
 }

@@ -74,5 +74,40 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 2:
+            {
+                Console.Write("Enter ToDo name which you want to delete: ");
+                string? name = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine("ToDo name can't be null or empty");
+                }
+                else
+                {
+                    ToDo? tempToDo = todos.Find(t => t.Name == name);
+
+                    if (tempToDo == null)
+                    {
+                        Console.WriteLine($"There is no ToDo {name}");
+                    }
+                    else
+                    {
+                        var tempSubToDoList = subtodoService.GetAllSubToDo(tempToDo.Id, connectionString);
+
+                        foreach (var subT in tempSubToDoList)
+                        {
+                            subtodoService.DeleteSubToDoByName(subT.Name, connectionString);
+                        }
+
+                        todoService.DeleteToDoByName(name, connectionString);
+                        Console.WriteLine($"ToDo {name} successfully deleted");
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
     }
 }

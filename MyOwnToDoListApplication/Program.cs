@@ -147,5 +147,23 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 4:
+            {
+                if (todos.Count == 0)
+                {
+                    Console.WriteLine("--- ToDo list is empty ---");
+                }
+                else
+                {
+                    foreach (var t in todos)
+                    {
+                        Console.WriteLine($"Id: {t.Id} - Name: {t.Name} - Progress: {t.Progress}");
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
     }
 }

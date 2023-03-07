@@ -165,5 +165,62 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 5:
+            {
+                if (todos.Count == 0)
+                {
+                    Console.WriteLine("--- ToDo list is empty ---");
+                }
+                else
+                {
+                    Console.Write("Enter ToDo name which you want to get: ");
+                    string? name = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        Console.WriteLine("ToDo name can't be null or empty");
+                    }
+                    else
+                    {
+                        ToDo? tempToDo = todos.Find(t => t.Name == name);
+
+                        if (tempToDo == null)
+                        {
+                            Console.WriteLine($"There is no ToDO {name}");
+                            Console.WriteLine("Maybe you enter wrong name or make mistake?");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Id: {tempToDo.Id} - Name: {tempToDo.Name} - Progress: {tempToDo.Progress}");
+
+                            subtodos = subtodoService.GetAllSubToDo(tempToDo.Id, connectionString);
+
+                            if (subtodos.Count == 0)
+                            {
+                                Console.WriteLine("\t--- SubToDo list is empty ---");
+                            }
+                            else
+                            {
+                                foreach (var sub in subtodos)
+                                {
+                                    Console.Write($"\tId: {sub.Id} - Name: {sub.Name} - Description: {sub.Description} - Deadline: {sub.Deadline} - ");
+                                    if (sub.Status)
+                                    {
+                                        Console.WriteLine("Status: completed");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Status: in progress");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
     }
 }

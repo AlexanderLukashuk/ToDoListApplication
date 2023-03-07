@@ -222,5 +222,19 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 6:
+            {
+                Console.WriteLine("Have a great day! Bye");
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
+        default:
+            {
+                Console.WriteLine("You chosen wrong option. Try again");
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
     }
 }

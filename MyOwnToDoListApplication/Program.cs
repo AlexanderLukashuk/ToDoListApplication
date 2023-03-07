@@ -326,6 +326,10 @@ while (menu != 123)
                             {
                                 Console.WriteLine($"There is no SubToDo {subToDoName}");
                             }
+                            else if (tempSubToDo.ToDoId != tempToDo.Id)
+                            {
+                                Console.WriteLine($"There is no SubToDo {subToDoName} in ToDo {todoName}");
+                            }
                             else
                             {
                                 subtodoService.DeleteSubToDoByName(subToDoName, connectionString);

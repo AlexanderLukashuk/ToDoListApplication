@@ -292,6 +292,53 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 7:
+            {
+                Console.Write("Enter ToDo name in which the SubToDo is located: ");
+                string? todoName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(todoName))
+                {
+                    Console.WriteLine("ToDo name can't be null or empty");
+                }
+                else
+                {
+                    ToDo? tempToDo = todos.Find(t => t.Name == todoName);
+
+                    if (tempToDo == null)
+                    {
+                        Console.WriteLine($"There is no ToDo {todoName}");
+                    }
+                    else
+                    {
+                        Console.Write("Enter SubToDo name which you want to delete: ");
+                        string? subToDoName = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(subToDoName))
+                        {
+                            Console.WriteLine("SubToDo name can't be null or empty");
+                        }
+                        else
+                        {
+                            SubToDo? tempSubToDo = subtodoService.GetSubToDoByName(subToDoName, connectionString);
+
+                            if (tempSubToDo == null)
+                            {
+                                Console.WriteLine($"There is no SubToDo {subToDoName}");
+                            }
+                            else
+                            {
+                                subtodoService.DeleteSubToDoByName(subToDoName, connectionString);
+                                Console.WriteLine($"SubToDo {subToDoName} successfully deleted");
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
         case 11:
             {
                 Console.WriteLine("Have a great day! Bye");

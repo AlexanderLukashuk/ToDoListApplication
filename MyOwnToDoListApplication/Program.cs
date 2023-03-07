@@ -32,7 +32,12 @@ while (menu != 123)
     Console.WriteLine("3) Update ToDo(set name)");
     Console.WriteLine("4) Get All ToDo");
     Console.WriteLine("5) Get ToDo by name");
-    Console.WriteLine("6) Exit");
+    Console.WriteLine("6) Create SubToDo");
+    Console.WriteLine("7) Delete SubToDo");
+    Console.WriteLine("8) Update SubToDo(set name, description, deadline)");
+    Console.WriteLine("9) Change SubToDo status");
+    Console.WriteLine("10) Get all SubToDo(single ToDo)");
+    Console.WriteLine("11) Exit");
 
     input = Console.ReadLine();
 
@@ -223,6 +228,71 @@ while (menu != 123)
                 break;
             }
         case 6:
+            {
+                Console.Write("Enter ToDo name in which you want to create SubToDo: ");
+                string? todoName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(todoName))
+                {
+                    Console.WriteLine("ToDo name can't be null or empty");
+                }
+                else
+                {
+                    ToDo? tempToDo = todoService.GetToDoByName(todoName, connectionString);
+
+                    if (tempToDo == null)
+                    {
+                        Console.WriteLine($"There is no ToDo {todoName}");
+                    }
+                    else
+                    {
+                        Console.Write("Enter SubToDo name: ");
+                        string? name = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(name))
+                        {
+                            Console.WriteLine("SubToDo name can't be null or empty");
+                        }
+                        else
+                        {
+                            SubToDo? tempSubToDo = subtodoService.GetSubToDoByName(name, connectionString);
+
+                            if (tempSubToDo == null)
+                            {
+                                Console.WriteLine($"SubToDo {name} already exists");
+                            }
+                            else
+                            {
+                                Console.Write("Enter SubToDo description: ");
+                                string? desc = Console.ReadLine();
+
+                                if (string.IsNullOrEmpty(desc))
+                                {
+                                    desc = "*No description*";
+                                }
+
+                                Console.Write("Enter SubToDo deadline(DateTime Format: MM/DD/YYYY HH:MM:SS): ");
+                                string? deadlineString = Console.ReadLine();
+                                DateTime deadline;
+
+                                if (!DateTime.TryParse(deadlineString, out deadline))
+                                {
+                                    Console.WriteLine("Incorrect DateTime Format. Deadline set is today.");
+                                    deadline = DateTime.Today;
+                                }
+
+                                subtodoService.CreateSubToDo(name, desc, deadline, false, tempToDo.Id, connectionString);
+                                Console.WriteLine("New SubToDo successfully created");
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
+        case 11:
             {
                 Console.WriteLine("Have a great day! Bye");
                 Console.WriteLine("Press enter to continue");

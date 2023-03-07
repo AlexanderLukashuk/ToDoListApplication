@@ -343,6 +343,156 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 8:
+            {
+                Console.Write("Enter ToDo name in which the SubToDo is located: ");
+                string? todoName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(todoName))
+                {
+                    Console.WriteLine("ToDo name can't be null or empty");
+                }
+                else
+                {
+                    // TODO Need additional verification
+                    ToDo? tempToDo = todoService.GetToDoByName(todoName, connectionString);
+
+                    if (tempToDo == null)
+                    {
+                        Console.WriteLine($"There is no ToDo {todoName}");
+                    }
+                    else
+                    {
+                        Console.Write("Enter SubToDo name which you want to update: ");
+                        string? subToDoName = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(subToDoName))
+                        {
+                            Console.WriteLine("SubToDo name can't be null or empty");
+                        }
+                        else
+                        {
+                            SubToDo? tempSubToDo = subtodoService.GetSubToDoByName(subToDoName, connectionString);
+
+                            if (tempSubToDo == null)
+                            {
+                                Console.WriteLine($"There is no SubToDo {subToDoName}");
+                            }
+                            else if (tempSubToDo.ToDoId != tempToDo.Id)
+                            {
+                                Console.WriteLine($"There is no SubToDo {subToDoName} in ToDo {todoName}");
+                            }
+                            else
+                            {
+                                string? newName;
+                                string? newDesc;
+                                string? newDeadlineString;
+                                DateTime newDeadline;
+                                string? updateChoice;
+                                Console.Write("Do you want to update name?(y/n)");
+                                updateChoice = Console.ReadLine();
+
+                                if (string.IsNullOrEmpty(updateChoice))
+                                {
+                                    Console.WriteLine("You didn't choose 'y' or 'n'. So input = 'n'");
+                                    updateChoice = "n";
+                                }
+
+                                updateChoice = updateChoice.ToLower();
+                                if (string.Equals(updateChoice, "y"))
+                                {
+                                    Console.Write("Enter new SubToDo name: ");
+                                    newName = Console.ReadLine();
+
+                                    if (string.IsNullOrEmpty(newName))
+                                    {
+                                        Console.WriteLine("New name can't be null or empty. So SubToDo name doesn't changed");
+                                        newName = tempSubToDo.Name;
+                                    }
+                                }
+                                else if (string.Equals(updateChoice, "n"))
+                                {
+                                    newName = tempSubToDo.Name;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Wrong input. Name won't change");
+                                    newName = tempSubToDo.Name;
+                                }
+
+                                Console.Write("Do you want to update description?(y/n)");
+                                updateChoice = Console.ReadLine();
+
+                                if (string.IsNullOrEmpty(updateChoice))
+                                {
+                                    Console.WriteLine("You didn't choose 'y' or 'n'. So input = 'n'");
+                                    updateChoice = "n";
+                                }
+
+                                updateChoice = updateChoice.ToLower();
+                                if (string.Equals(updateChoice, "y"))
+                                {
+                                    Console.Write("Enter new SubToDo description: ");
+                                    newDesc = Console.ReadLine();
+
+                                    if (string.IsNullOrEmpty(newDesc))
+                                    {
+                                        Console.WriteLine("New description can't be null or empty. So SubToDo description doesn't changed");
+                                        newDesc = tempSubToDo.Description;
+                                    }
+                                }
+                                else if (string.Equals(updateChoice, "n"))
+                                {
+                                    newDesc = tempSubToDo.Description;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Wrong input. Description won't change");
+                                    newDesc = tempSubToDo.Description;
+                                }
+
+                                Console.Write("Do you want to update deadline?(y/n)");
+                                updateChoice = Console.ReadLine();
+
+                                if (string.IsNullOrEmpty(updateChoice))
+                                {
+                                    Console.WriteLine("You didn't choose 'y' or 'n'. So input = 'n'");
+                                    updateChoice = "n";
+                                }
+
+                                updateChoice = updateChoice.ToLower();
+                                if (string.Equals(updateChoice, "y"))
+                                {
+                                    Console.Write("Enter new SubToDo deadline(DateTime Format: MM/DD/YYYY HH:MM:SS): ");
+                                    newDeadlineString = Console.ReadLine();
+
+                                    if (!DateTime.TryParse(newDeadlineString, out newDeadline))
+                                    {
+                                        Console.WriteLine("Incorrect DateTime Format. So deadline won't change");
+                                        newDeadline = tempSubToDo.Deadline;
+                                    }
+                                }
+                                else if (string.Equals(updateChoice, "n"))
+                                {
+                                    newDeadline = tempSubToDo.Deadline;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Wrong input. So SubToDo deadline won't change");
+                                    newDeadline = tempSubToDo.Deadline;
+                                }
+
+                                subtodoService.UpdateSubToDoByName(subToDoName, newName, newDesc, newDeadline, connectionString);
+                                Console.WriteLine($"SubToDo {subToDoName} information successfully updated");
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
         case 11:
             {
                 Console.WriteLine("Have a great day! Bye");

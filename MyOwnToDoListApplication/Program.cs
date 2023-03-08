@@ -590,6 +590,8 @@ while (menu != 11)
                     }
                 }
 
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
                 break;
             }
         case 11:

@@ -467,7 +467,7 @@ while (menu != 11)
                                     Console.Write("Enter new SubToDo deadline(DateTime Format: MM/DD/YYYY HH:MM:SS): ");
                                     newDeadlineString = Console.ReadLine();
 
-                                    if (!DateTime.TryParse(newDeadlineString, out newDeadline))
+                                    if (!DateTime.TryParseExact(newDeadlineString, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out newDeadline))
                                     {
                                         Console.WriteLine("Incorrect DateTime Format. So deadline won't change");
                                         newDeadline = tempSubToDo.Deadline;

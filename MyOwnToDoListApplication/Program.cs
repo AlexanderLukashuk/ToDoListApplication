@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using MyOwnToDoListApplication.Srvices;
 using MyOwnToDoListApplicationLibrary;
@@ -275,7 +276,7 @@ while (menu != 11)
                                 string? deadlineString = Console.ReadLine();
                                 DateTime deadline;
 
-                                if (!DateTime.TryParse(deadlineString, out deadline))
+                                if (!DateTime.TryParseExact(deadlineString, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out deadline))
                                 {
                                     Console.WriteLine("Incorrect DateTime Format. Deadline set is today.");
                                     deadline = DateTime.Today;
@@ -594,8 +595,6 @@ while (menu != 11)
         case 11:
             {
                 Console.WriteLine("Have a great day! Bye");
-                Console.WriteLine("Press enter to continue");
-                Console.Read();
                 break;
             }
         default:

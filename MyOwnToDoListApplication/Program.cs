@@ -493,6 +493,57 @@ while (menu != 123)
                 Console.Read();
                 break;
             }
+        case 9:
+            {
+                Console.Write("Enter ToDo name which SubToDo status you want to update: ");
+                string? todoName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(todoName))
+                {
+                    Console.WriteLine("ToDo name can't be null or empty");
+                }
+                else
+                {
+                    ToDo? tempToDo = todoService.GetToDoByName(todoName, connectionString);
+
+                    if (tempToDo == null)
+                    {
+                        Console.WriteLine($"There is no ToDo {todoName}");
+                    }
+                    else
+                    {
+                        Console.Write("Enter SubToDo name which status you want to update: ");
+                        string? subtodoName = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(subtodoName))
+                        {
+                            Console.WriteLine("SubToDo name can't be null or empty");
+                        }
+                        else
+                        {
+                            SubToDo? tempSubToDo = subtodoService.GetSubToDoByName(subtodoName, connectionString);
+
+                            if (tempSubToDo == null)
+                            {
+                                Console.WriteLine($"There is no SubToDo {subtodoName}");
+                            }
+                            else if (tempSubToDo.ToDoId != tempToDo.Id)
+                            {
+                                Console.WriteLine($"There is no SubToDo {subtodoName} in ToDo {todoName}");
+                            }
+                            else
+                            {
+                                subtodoService.ChangeSubToDoStatusByName(subtodoName, !tempSubToDo.Status, connectionString);
+                                Console.WriteLine($"SubToDo {subtodoName} status successfully updated");
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("Press enter to continue");
+                Console.Read();
+                break;
+            }
         case 11:
             {
                 Console.WriteLine("Have a great day! Bye");

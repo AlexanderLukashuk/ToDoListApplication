@@ -21,7 +21,7 @@ SubToDoService subtodoService = new SubToDoService();
 List<ToDo> todos;
 List<SubToDo> subtodos;
 
-while (menu != 123)
+while (menu != 11)
 {
     Console.Clear();
     todos = todoService.GetAllToDo(connectionString);

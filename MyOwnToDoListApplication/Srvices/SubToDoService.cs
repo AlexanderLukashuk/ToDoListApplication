@@ -119,6 +119,8 @@ namespace MyOwnToDoListApplication.Srvices
 
 					using (var command = new SqlCommand(query, connection))
 					{
+						command.Parameters.AddWithValue("@todoID", todoID);
+
 						using (var reader = command.ExecuteReader())
 						{
 							while (reader.Read())

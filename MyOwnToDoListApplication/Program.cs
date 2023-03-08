@@ -258,7 +258,7 @@ while (menu != 11)
                         {
                             SubToDo? tempSubToDo = subtodoService.GetSubToDoByName(name, connectionString);
 
-                            if (tempSubToDo == null)
+                            if (tempSubToDo != null)
                             {
                                 Console.WriteLine($"SubToDo {name} already exists");
                             }

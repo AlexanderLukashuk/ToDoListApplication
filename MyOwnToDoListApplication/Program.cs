@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
+using MyOwnToDoListApplication.Data;
 using MyOwnToDoListApplication.Srvices;
 using MyOwnToDoListApplicationLibrary;
 
@@ -15,12 +16,56 @@ var config = builder.Build();
 
 string connectionString = config.GetConnectionString("DefaultConnection");
 
+SqlServerDbInitializer dbInitializer = new SqlServerDbInitializer(connectionString);
+
 int menu = -3;
+int welcomeMenu = -3;
 string? input;
 ToDoService todoService = new ToDoService();
 SubToDoService subtodoService = new SubToDoService();
 List<ToDo> todos;
 List<SubToDo> subtodos;
+List<User> users;
+
+while (welcomeMenu != 3)
+{
+    //Console.Clear();
+    //users = 
+
+    Console.WriteLine("Choose option:");
+    Console.WriteLine("1) Sign Up");
+    Console.WriteLine("2) Log In");
+    Console.WriteLine("3) Exit");
+
+    input = Console.ReadLine();
+
+    if (!int.TryParse(input, out welcomeMenu) || string.IsNullOrEmpty(input))
+    {
+        Console.WriteLine("Incorrect input. Try again");
+        continue;
+    }
+
+    Console.Clear();
+
+    switch (welcomeMenu)
+    {
+        case 1:
+            {
+                Console.Write("Enter email: ");
+                string? email = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(email))
+                {
+                    Console.WriteLine("Email can't be null or empty");
+                }
+                else
+                {
+                    //User? tempUser = 
+                }
+                break;
+            }
+    }
+}
 
 while (menu != 11)
 {

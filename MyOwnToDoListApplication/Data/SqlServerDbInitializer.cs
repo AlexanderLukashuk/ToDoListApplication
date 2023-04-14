@@ -4,11 +4,11 @@ using MyOwnToDoListApplication.Interfaces;
 
 namespace MyOwnToDoListApplication.Data
 {
-	public class PostgresDbInitializer : IDbInitializer
+	public class SqlServerDbInitializer : IDbInitializer
     {
         private readonly string connectionString;
 
-        public PostgresDbInitializer(string connectionString)
+        public SqlServerDbInitializer(string connectionString)
 		{
             this.connectionString = connectionString;
         }

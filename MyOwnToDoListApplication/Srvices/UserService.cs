@@ -39,6 +39,34 @@ namespace MyOwnToDoListApplication.Srvices
 				}
 			}
 		}
+
+		public void DeleteUserByEmail(string email, string connectionString)
+		{
+			using (var connection = new SqlConnection(connectionString))
+			{
+				try
+				{
+                    connection.Open();
+
+                    string query = "DELETE FROM User WHERE Email = @email";
+
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@email", email);
+
+						command.ExecuteNonQuery();
+					}
+                }
+				catch (SqlException ex)
+				{
+                    Console.WriteLine("ERROR: " + ex.Message);
+                }
+				finally
+				{
+					connection.Close();
+				}
+            }
+		}
 	}
 }
 

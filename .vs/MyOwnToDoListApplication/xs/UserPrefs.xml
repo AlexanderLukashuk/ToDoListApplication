@@ -1,30 +1,25 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{05D34267-0CE7-4563-B3B4-FD6A75336706}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyOwnToDoListApplication/Data/PostgresDbInitializer.cs">
+  <MonoDevelop.Ide.ItemProperties.MyOwnToDoListApplication PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MyOwnToDoListApplication/Srvices/UserService.cs">
     <Files>
-      <File FileName="MyOwnToDoListApplication/Program.cs" Line="16" Column="75" />
-      <File FileName="MyOwnToDoListApplicationLibrary/ToDo.cs" />
-      <File FileName="MyOwnToDoListApplication/appsettings.json" Line="3" Column="115" />
-      <File FileName="MyOwnToDoListApplicationLibrary/SubToDo.cs" Line="1" Column="1" />
-      <File FileName="MyOwnToDoListApplication/Srvices/ToDoService.cs" Line="22" Column="62" />
-      <File FileName="MyOwnToDoListApplication/Srvices/SubToDoService.cs" />
-      <File FileName="MyOwnToDoListApplication/Data/PostgresDbInitializer.cs" Line="17" Column="10" />
-      <File FileName="MyOwnToDoListApplication/Interfaces/IDbInitializer.cs" Line="4" Column="33" />
+      <File FileName="MyOwnToDoListApplication/Program.cs" Line="33" Column="15" />
+      <File FileName="MyOwnToDoListApplicationLibrary/ToDo.cs" Line="9" Column="40" />
+      <File FileName="MyOwnToDoListApplication/appsettings.json" />
+      <File FileName="MyOwnToDoListApplicationLibrary/SubToDo.cs" Line="11" Column="3" />
+      <File FileName="MyOwnToDoListApplication/Srvices/ToDoService.cs" Line="23" Column="54" />
+      <File FileName="MyOwnToDoListApplication/Srvices/SubToDoService.cs" Line="1" Column="1" />
+      <File FileName="MyOwnToDoListApplication/Srvices/UserService.cs" Line="9" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MyOwnToDoListApplication" expanded="True">
             <Node name="MyOwnToDoListApplication" expanded="True">
-              <Node name="Data" expanded="True">
-                <Node name="PostgresDbInitializer.cs" selected="True" />
-              </Node>
+              <Node name="Data" expanded="True" />
               <Node name="Interfaces" expanded="True" />
-              <Node name="Srvices" expanded="True" />
+              <Node name="Srvices" expanded="True">
+                <Node name="UserService.cs" selected="True" />
+              </Node>
             </Node>
             <Node name="MyOwnToDoListApplicationLibrary" expanded="True" />
           </Node>
@@ -32,6 +27,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.MyOwnToDoListApplication PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
